@@ -91,16 +91,14 @@ def login():
         user = cursor.fetchone()
 
         if user:
-            role = user[3]  # the role is in the 4th column of the 'users' table
+            role = user[3]  # Assuming the role is in the 4th column of the 'users' table (adjust index if needed)
 
-            if role == 'doctor':
-                return jsonify({"message": "Login successful. Redirecting to doctor page."}), 200
-            elif role == 'patient':
-                return jsonify({"message": "Login successful. Redirecting to patient page."}), 200
-            else:
-                return jsonify({"message": "Invalid role."}), 403
+            return jsonify({"message": "Login successful",
+                "email": email,
+                "role": role}), 200
         else:
             return jsonify({"message": "The email or password is incorrect."}), 401
+
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500

@@ -9,8 +9,11 @@ const Bar = ({ isSignedUp, setIsSignedUp }) => {
   const navigate = useNavigate();  // استخدام useNavigate
 
   const handleLogout = () => {
-    setIsSignedUp(false);  // تعيين isSignedUp إلى false عند الخروج
-    navigate('/login');  // التوجيه إلى صفحة تسجيل الدخول
+    const confirmed = window.confirm("Are you sure you want to log out?");
+    if (confirmed) {
+      setIsSignedUp(false);  
+      navigate('/login');    // التوجيه إلى صفحة تسجيل الدخول
+    }
   };
   return (
     <Navbar expand="lg" bg="light" variant="light">

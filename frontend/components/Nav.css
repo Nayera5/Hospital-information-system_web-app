@@ -1,11 +1,15 @@
 /* تصميم الـ Navbar */
 .navbar {
     padding: 15px 30px;
-    background-color: #6a4cfc  !important;  /* اللون المفضل للـ Navbar */
-    border-radius: 10px;  /* حواف ناعمة */
+    background-color:#2f5dac  !important;  
+    border-radius: 10px;
+  }
+  #home{
+margin-right: 670px;
+    
   }
   
-  .navbar-brand {
+    .navbar-brand {
     font-size: 1.8rem;
     font-weight: bold;
     color: rgb(255, 255, 255);
@@ -15,10 +19,12 @@
   
   .navbar-brand img {
     height: 50px;  /* تعديل حجم اللوجو */
-    margin-right: 10px;  /* مسافة بين اللوجو والنص */
+    margin-right: 10px;
   }
   
   .navbar-nav .nav-link {
+    margin-left: auto;
+
     font-size: 1.1rem;
     font-weight: 500;
     color: rgb(255, 250, 254);
@@ -27,7 +33,7 @@
   }
   
   .navbar-nav .nav-link:hover {
-    color: #ecdc48;
+    color: #05090a
   }
   
   /* تعديل المسافات عند تصغير الشاشة */

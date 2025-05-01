@@ -1,0 +1,50 @@
+/* تصميم الـ Navbar */
+.navbar {
+    padding: 15px 30px;
+    background-color: #6a4cfc  !important;  /* اللون المفضل للـ Navbar */
+    border-radius: 10px;  /* حواف ناعمة */
+  }
+  
+  .navbar-brand {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-brand img {
+    height: 50px;  /* تعديل حجم اللوجو */
+    margin-right: 10px;  /* مسافة بين اللوجو والنص */
+  }
+  
+  .navbar-nav .nav-link {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: rgb(255, 250, 254);
+    margin-right: 40px;  /* مسافة بين العناصر */
+    transition: color 0.3s ease;
+  }
+  
+  .navbar-nav .nav-link:hover {
+    color: #ecdc48;
+  }
+  
+  /* تعديل المسافات عند تصغير الشاشة */
+  @media (max-width: 992px) {
+    .navbar {
+      padding: 10px 20px;
+    }
+  
+    .navbar-nav .nav-link {
+      margin-right: 15px;  /* تقليل المسافة بين الروابط في الشاشات الصغيرة */
+    }
+  }
+  
+  /* تصميم الـ Navbar في حالة التوسع */
+  @media (min-width: 992px) {
+    .navbar-collapse {
+      justify-content: flex-end;  /* وضع العناصر في أقصى اليمين */
+    }
+  }
+  

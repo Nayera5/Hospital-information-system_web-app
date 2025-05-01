@@ -1,9 +1,17 @@
 import React from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link , useNavigate} from 'react-router-dom';
 import "./Nav.css";
 
-const Bar = ({ isSignedUp }) => {
+
+
+const Bar = ({ isSignedUp, setIsSignedUp }) => {
+  const navigate = useNavigate();  // استخدام useNavigate
+
+  const handleLogout = () => {
+    setIsSignedUp(false);  // تعيين isSignedUp إلى false عند الخروج
+    navigate('/login');  // التوجيه إلى صفحة تسجيل الدخول
+  };
   return (
     <Navbar expand="lg" bg="light" variant="light">
       <Container>
@@ -20,13 +28,18 @@ const Bar = ({ isSignedUp }) => {
             <Nav.Link as={Link} to="/">Home</Nav.Link>
 
             {isSignedUp ? (
+              <>
               <Nav.Link as={Link} to="/profile">Profile</Nav.Link>
+              <Nav.Link as="button" onClick={handleLogout}>Log Out</Nav.Link>  {/* تغيير إلى زر مع onClick */}
+            </>
             ) : (
               <>
                 <Nav.Link as={Link} to="/signup">Sign Up</Nav.Link>
                 <Nav.Link as={Link} to="/login">Log in</Nav.Link>
               </>
             )}
+
+
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -26,9 +26,10 @@ def hello():
 
 #SIGN UP
 app.register_blueprint(sign)
-app.register_blueprint(prof)
 
 #PROFILE (get)(update)
+app.register_blueprint(prof)
+
 
 
 if __name__ == "__main__":

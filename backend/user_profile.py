@@ -73,21 +73,53 @@ def get_profile():
         cursor.execute("SELECT * FROM users WHERE id = %s", (user_id,))
         user = cursor.fetchone()
 
-        if user:
-            profile = {
-                "id": user[0],
-                "email": user[1],
-                "password": user[2],
-                "role": user[3],
-                "name": user[4],
-                "p": user[5],
-                "gender": user[6],
-                "age": user[7],
-                "phone": user[8]
-            }
-            return jsonify(profile), 200
-        else:
+         if not user:
             return jsonify({"message": "User not found"}), 404
+
+        user_id, email, role = user
+
+        if role == 'patient':
+            cursor.execute(
+                "SELECT pid, name, age, gender, blood_type, phone FROM patients WHERE pid = %s", (user_id,))
+            data = cursor.fetchone()
+
+            if data:
+                profile = {
+                    "id": data[0],
+                    "email": email,
+                    "role": role,
+                    "name": data[1],
+                    "age": data[2],
+                    "gender": data[3],
+                    "blood_type": data[4],
+                    "phone": data[5]
+                }
+            else:
+                return jsonify({"message": "Patient details not found"}), 404
+
+        elif role == 'doctor':
+            cursor.execute(
+                "SELECT do_id, name, speciality, gender, doc_phone, dage FROM doctors WHERE do_id = %s", (user_id,))
+            data = cursor.fetchone()
+
+            if data:
+                profile = {
+                    "id": data[0],
+                    "email": email,
+                    "role": role,
+                    "name": data[1],
+                    "speciality": data[2],
+                    "gender": data[3],
+                    "phone": data[4],
+                    "age": data[5]
+                }
+            else:
+                return jsonify({"message": "Doctor details not found"}), 404
+
+        else:
+            return jsonify({"message": "Unknown role"}), 403
+
+        return jsonify(profile), 200
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500

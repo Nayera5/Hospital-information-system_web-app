@@ -51,4 +51,34 @@ def edit_profile(user_id):
                         "phone": phone,
                         "pic": f"http://localhost:5000/uploads/{filename}"
                         })
+#get user
+@app.route('/profile', methods=['POST'])
+def get_profile():
+    email = request.json.get('email')
+
+    if not email:
+        return jsonify({"message": "Email is required"}), 400
+
+    try:
+        cursor = con.cursor()
+        cursor.execute("SELECT * FROM users WHERE email = %s", (email,))
+        user = cursor.fetchone()
+
+        if user:
+            profile = {
+                "id": user[0],
+                "email": user[1],
+                "role": user[2],
+                "name": user[4],
+                "p": user[5],
+                "gender": user[6],
+                "age": user[7],
+                "phone": user[8]
+            }
+            return jsonify(profile), 200
+        else:
+            return jsonify({"message": "User not found."}), 404
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 

@@ -62,23 +62,23 @@ def edit_profile(user_id):
 
 
 #get user
-@app.route('/profile', methods=['POST'])
+@app.route('/get_profile', methods=['GET'])
 def get_profile():
-    email = request.json.get('email')
-
-    if not email:
-        return jsonify({"message": "Email is required"}), 400
+    user_id = request.args.get('user_id')
+    if not user_id:
+        return jsonify({"error": "Missing user_id"}), 400
 
     try:
         cursor = con.cursor()
-        cursor.execute("SELECT * FROM users WHERE email = %s", (email,))
+        cursor.execute("SELECT * FROM users WHERE id = %s", (user_id,))
         user = cursor.fetchone()
 
         if user:
             profile = {
                 "id": user[0],
                 "email": user[1],
-                "role": user[2],
+                "password": user[2],
+                "role": user[3],
                 "name": user[4],
                 "p": user[5],
                 "gender": user[6],
@@ -87,7 +87,7 @@ def get_profile():
             }
             return jsonify(profile), 200
         else:
-            return jsonify({"message": "User not found."}), 404
+            return jsonify({"message": "User not found"}), 404
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500

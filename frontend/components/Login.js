@@ -27,7 +27,9 @@ const handleSubmit = async (e) => {
   try {
     const response = await axios.post('http://127.0.0.1:5000/login', formData);
     console.log('Response:', response.data);
+    setIsSignedUp(true); 
     alert("Login successful");
+    navigate("/"); 
 
   } catch (error) {
     console.error('Login failed:', error.response ? error.response.data : error.message);

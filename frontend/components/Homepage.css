@@ -1,0 +1,18 @@
+
+
+header img {
+    max-width: 100%;
+    width: 430px;
+    height: auto;
+    animation: mover 1s infinite alternate;
+    transition: .3s ease all;
+}
+
+@keyframes mover {
+    0% {
+        transform: translateY(0px);
+    }
+    100% {
+        transform: translateY(-10px);
+    }
+}

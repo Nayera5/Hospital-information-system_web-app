@@ -8,7 +8,7 @@ import { MdDateRange } from "react-icons/md";
 import { Link , useNavigate} from 'react-router-dom';
 import { FaHome } from 'react-icons/fa';
 import { FaVenusMars } from "react-icons/fa";
-
+import photo from '../pictures/doct.jpg'
 
 import axios from 'axios';
 
@@ -102,7 +102,7 @@ function Signup({ setIsSignedUp }) {
       const response = await axios.post("http://127.0.0.1:5000/reg", dataToSend);
       console.log("Response from backend:", response.data);
       alert("Registration successful!");
-      setIsSignedUp(true);  // ✅ استخدام الدالة المرسلة
+      setIsSignedUp(true);  
       navigate("/"); 
 
     } catch (error) {
@@ -120,24 +120,26 @@ function Signup({ setIsSignedUp }) {
 
     <div className="signup-page">
       
-      <div className="left-side">
+      <div className="left-side" style={{
+    backgroundImage: `url(${photo})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+  }}>
       <>
   <Link to="/" className="home-icon">
     <FaHome />
   </Link>
 </>
-
-        <h2>MediCare</h2>
-        <p>We at MediCare are always fully focused on helping your child.</p>
       </div>
       <div className="right-side">
         <div className="form-content">
           
-          <h2 className="text-center mb-4" id='signup'>Create Account</h2>
 
 
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
+            <h2 className="text-center mb-4" id='signup'>Create Account</h2>
+
               <Form.Label>Choose your role</Form.Label>
               <Form.Select value={role} onChange={handleRoleChange}>
                 <option value="">Select Role</option>
@@ -245,3 +247,5 @@ function Signup({ setIsSignedUp }) {
     </div>
   );}
 export default Signup;
+
+

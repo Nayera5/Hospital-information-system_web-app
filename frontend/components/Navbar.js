@@ -18,7 +18,7 @@ const Bar = ({ isSignedUp, setIsSignedUp }) => {
   return (
     <Navbar expand="lg" bg="light" variant="light">
       <Container>
-        <Navbar.Brand href="#">
+        <Navbar.Brand >
           <img
             src="download.png"
             alt="Hospital Logo"

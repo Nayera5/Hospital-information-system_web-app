@@ -3,6 +3,7 @@ from werkzeug.utils import secure_filename
 from flask_cors import CORS
 import os
 from sign import sign
+from user_profile import prof
 
 app = Flask(__name__)
 CORS(app)  
@@ -25,7 +26,7 @@ def hello():
 
 #SIGN UP
 app.register_blueprint(sign)
-
+app.register_blueprint(prof)
 
 #PROFILE (get)(update)
 

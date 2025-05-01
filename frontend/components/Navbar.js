@@ -12,7 +12,7 @@ const Bar = ({ isSignedUp, setIsSignedUp }) => {
     const confirmed = window.confirm("Are you sure you want to log out?");
     if (confirmed) {
       setIsSignedUp(false);  
-      navigate('/login');    // التوجيه إلى صفحة تسجيل الدخول
+      navigate('/login');    
     }
   };
   return (

@@ -1,9 +1,54 @@
+header {
+    margin-top: 0px;
+    background-color: #ffffff;
+}
 
+header .row {
+    margin: 50px 0px;
+}
 
+header .row h5 {
+    color: var(--btn-color);
+    font-size: 20px;
+    margin: 40px 0px 10px 0px;
+}
+
+header h2 {
+    color: var(--main-color);
+    font-size: 50px;
+    margin: 30px 0px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    word-spacing: 5px;
+}
+header h4{
+    color: var(--main-color);
+    font-size: 40px;
+    margin: 30px 0px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    word-spacing: 5px;
+
+}
 header img {
     max-width: 100%;
     width: 430px;
     height: auto;
+}
+
+header button {
+    background-color: var(--orange-color) !important;
+    width: 200px;
+    height: 60px;
+    border: 1px solid var(--orange-color) !important;
+    border-radius: 4px !important;
+    margin-top: 20px;
+}
+
+header img {
+    max-width: 100%;
+    width: 490px;
+    height: 400px;
     animation: mover 1s infinite alternate;
     transition: .3s ease all;
 }

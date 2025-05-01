@@ -5,15 +5,18 @@ import { RiLockPasswordLine } from 'react-icons/ri';
 import React,{ useState } from 'react';
 import { FaPhoneAlt } from "react-icons/fa";
 import { MdDateRange } from "react-icons/md";
-import { Link } from 'react-router-dom';
+import { Link , useNavigate} from 'react-router-dom';
 import { FaHome } from 'react-icons/fa';
 import { FaVenusMars } from "react-icons/fa";
+
+
 import axios from 'axios';
 
 
 import './Signup.css';
 
-function Signup() {
+
+function Signup({ setIsSignedUp }) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -69,6 +72,7 @@ function Signup() {
     setError(''); 
   };
   
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -98,17 +102,24 @@ function Signup() {
       const response = await axios.post("http://127.0.0.1:5000/reg", dataToSend);
       console.log("Response from backend:", response.data);
       alert("Registration successful!");
+      setIsSignedUp(true);  // ✅ استخدام الدالة المرسلة
+      navigate("/"); 
+
     } catch (error) {
       console.error("Error sending data:", error);
       alert("Something went wrong!");
+
     }
   };
-  
+
 
 
   return (
 
+    
+
     <div className="signup-page">
+      
       <div className="left-side">
       <>
   <Link to="/" className="home-icon">

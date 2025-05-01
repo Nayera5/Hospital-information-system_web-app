@@ -40,8 +40,16 @@ def edit_profile(user_id):
 
     else:
         #update
-        cursor.execute("UPDATE users SET email=%s,password=%s,name=%s,phone=%s,pic=%s WHERE id=%s",(email,new_password,name,phone,filepath,user_id))
+        cursor.execute("UPDATE users SET email=%s,password=%s,name=%s,phone=%s,pic=%s WHERE id=%s",(email,new_password,name,phone,filename,user_id))
 
         con.commit()
-        return jsonify({"message": "User Updated successfully"})
+        return jsonify({"message": "User Updated successfully"
+                        ,
+                        "email": email,
+                        "password":new_password,
+                        "name": name,
+                        "phone": phone,
+                        "pic": filepath,
+                        "image_url": f"http://localhost:5000/uploads/{filename}"
+                        })
 

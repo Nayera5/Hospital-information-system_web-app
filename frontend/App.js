@@ -10,7 +10,6 @@ function AppContent() {
   const location = useLocation();
   const [isSignedUp, setIsSignedUp] = useState(false);
 
-  // إخفاء الـ Navbar في صفحتي signup و login
   const showNavbar = !["/signup", "/login"].includes(location.pathname);
 
   return (

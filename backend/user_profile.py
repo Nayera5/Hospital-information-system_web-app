@@ -27,13 +27,13 @@ def edit_profile(user_id):
 
     cursor=con.cursor()
     
-    cursor.execute("SELECT password FROM users WHERE id=%s",(user_id,))
+    cursor.execute("SELECT password,role FROM users WHERE id=%s",(user_id,))
     res=cursor.fetchone()
 
     if not res:
         return jsonify({"message": "User not found"}), 404
     
-    old_pass=res[0]
+    old_pass,role = res
 
     if old_pass!= old_password:
         return jsonify({"message": "Old password is incorrect!"}), 401
@@ -41,6 +41,13 @@ def edit_profile(user_id):
     else:
         #update
         cursor.execute("UPDATE users SET email=%s,password=%s,name=%s,phone=%s,pic=%s WHERE id=%s",(email,new_password,name,phone,filename,user_id))
+
+        if role=='doctor':
+            cursor.execute("UPDATE doctors SET name=%s,doc_phone=%s WHERE do_id=%s",(name,phone,user_id))
+
+        elif role=='patient':
+            cursor.execute("UPDATE patients SET name=%s,phone=%s WHERE pid=%s",(name,phone,user_id))
+
 
         con.commit()
         return jsonify({"message": "User Updated successfully"
@@ -51,6 +58,9 @@ def edit_profile(user_id):
                         "phone": phone,
                         "pic": f"http://localhost:5000/uploads/{filename}"
                         })
+
+
+
 #get user
 @app.route('/profile', methods=['POST'])
 def get_profile():

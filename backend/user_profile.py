@@ -49,7 +49,6 @@ def edit_profile(user_id):
                         "password":new_password,
                         "name": name,
                         "phone": phone,
-                        "pic": filepath,
-                        "image_url": f"http://localhost:5000/uploads/{filename}"
+                        "pic": f"http://localhost:5000/uploads/{filename}"
                         })
 

@@ -5,6 +5,7 @@ import { Form, InputGroup, Button, Row, Col, Container } from 'react-bootstrap'
 import { Link , useNavigate} from 'react-router-dom';
 import { FaHome } from 'react-icons/fa';
 
+import axios from 'axios';
 import './Signup.css';
 
 const Login = ({ setIsSignedUp }) => {
@@ -21,12 +22,18 @@ const Login = ({ setIsSignedUp }) => {
   };
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Form Data:', formData);
-    setIsSignedUp(true); // ✅ تحديث الحالة
-      navigate("/");
-  };
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const response = await axios.post('http://127.0.0.1:5000/login', formData);
+    console.log('Response:', response.data);
+    alert("Login successful");
+
+  } catch (error) {
+    console.error('Login failed:', error.response ? error.response.data : error.message);
+    alert("Something went wrong!");
+  }
+};
 
   return (
     <Container fluid className="signin-page">

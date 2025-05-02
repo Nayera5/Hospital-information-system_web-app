@@ -6,8 +6,8 @@ import "./Nav.css";
 
 
 const Bar = ({ isSignedUp, setIsSignedUp }) => {
-  const navigate = useNavigate();  // استخدام useNavigate
-
+  const navigate = useNavigate();  
+  
   const handleLogout = () => {
     const confirmed = window.confirm("Are you sure you want to log out?");
     if (confirmed) {
@@ -29,7 +29,6 @@ const Bar = ({ isSignedUp, setIsSignedUp }) => {
         <Navbar.Collapse id="navbarNav">
           <Nav className="me-auto">
             <Nav.Link  id ="home" as={Link} to="/">Home</Nav.Link>
-            <Nav.Link  id ="contactus" as={Link} to="/">Contact Us</Nav.Link>
 
 
             {isSignedUp ? (
@@ -43,6 +42,8 @@ const Bar = ({ isSignedUp, setIsSignedUp }) => {
                 <Nav.Link as={Link} to="/login">Log in</Nav.Link>
               </>
             )}
+                  <Nav.Link  id ="contactus" as={Link} to="/">Contact Us</Nav.Link>
+
 
 
           </Nav>

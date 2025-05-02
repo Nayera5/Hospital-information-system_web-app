@@ -5,6 +5,8 @@ import Login from "./component/Login";
 import Signup from "./component/Signup";
 import Bar from "./component/Navbar";
 import Home from "./component/Homepage";
+import Profile from './components/patientprof';
+import Edit from './components/profedit';
 
 function AppContent() {
   const location = useLocation();
@@ -19,7 +21,8 @@ function AppContent() {
         <Route path="/" element={<Home/>} />
         <Route path="/login" element={<Login setIsSignedUp={setIsSignedUp} />} />
         <Route path="/signup" element={<Signup setIsSignedUp={setIsSignedUp} />} />
-        <Route path="/profile" element={<h1>Profile Page</h1>} />
+        <Route path="/get_profile/:id" element={<Profile/>} />
+        <Route path="/edit/:id" element={<Edit/>} />
       </Routes>
     </>
   );

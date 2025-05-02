@@ -1,72 +1,108 @@
-# from flask import Flask, request, render_template,jsonify,Blueprint,current_app
-# from werkzeug.utils import secure_filename
-# from flask_cors import CORS
-# import os
-# from sign import sign
-# from user_profile import prof
+
+import React, { useState } from 'react';
+import { MdEmail } from "react-icons/md";
+import { RiLockPasswordLine } from "react-icons/ri";
+import { Form, InputGroup, Button, Row, Col, Container } from 'react-bootstrap'
+import { Link , useNavigate} from 'react-router-dom';
+import { FaHome } from 'react-icons/fa';
+import photo from '../pictures/doct.jpg'
 
 
-# app = Flask(__name__)
-# CORS(app)  
+import axios from 'axios';
+import './Signup.css';
+
+const Login = ({ setIsSignedUp }) => {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+  const navigate = useNavigate();
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const response = await axios.post('http://127.0.0.1:5000/login', formData);
+    console.log('Response:', response.data);
+    setIsSignedUp(true); 
+    alert("Login successful");
+    navigate("/"); 
+
+  } catch (error) {
+    console.error('Login failed:', error.response ? error.response.data : error.message);
+    alert("Something went wrong!");
+  }
+};
+
+  return (
+    <div className="signup-page">
+      
+      <div className="left-side" style={{
+    backgroundImage: `url(${photo})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+  }}>
+      <>
+  <Link to="/" className="home-icon">
+    <FaHome />
+  </Link>
+</>
+      </div>
+      <div className="right-side">
+        <div className="form-content">
+          
 
 
+            <Form onSubmit={handleSubmit}>
+                        <Form.Group className="mb-3">
+                        <h2 className="text-center mb-4" id='signup'>Log In</h2>
+                        </Form.Group>
+            
+              <>
+               
 
-# app.config['UPLOAD_FOLDER']='./uploads'
-# app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024 
+                <Form.Group className="mb-3">
+                  <InputGroup>
+                    <InputGroup.Text><MdEmail /></InputGroup.Text>
+                    <Form.Control type="email"name="email"placeholder="Email"value={formData.email}onChange={handleChange} required/>
+                  </InputGroup>
+                </Form.Group>
 
-# if not os.path.exists(app.config['UPLOAD_FOLDER']):
-#     os.makedirs(app.config['UPLOAD_FOLDER'])
+                <Form.Group className="mb-3">
+                  <InputGroup>
+                    <InputGroup.Text><RiLockPasswordLine /></InputGroup.Text>
+                    <Form.Control type="password"name="password"placeholder="Password"value={formData.password}onChange={handleChange} required/>
+                  </InputGroup>
+                </Form.Group>
 
+                
 
+                <Button type="submit" className="w-100 custom-button mt-3">
+                  Log In
+                </Button>
 
-
-# #any home page
-# @app.route('/')
-# def hello():
-#     return render_template('index.html')
-
-# #SIGN UP
-# app.register_blueprint(sign)
-
-# #PROFILE (get)(update)
-# app.register_blueprint(prof)
-
-
-
-# if __name__ == "__main__":
-#     app.run(debug=True)
-
-
-from flask import Flask, request, render_template, jsonify, Blueprint, current_app, send_from_directory
-from werkzeug.utils import secure_filename
-from flask_cors import CORS
-import os
-from sign import sign
-from user_profile import prof
-
-app = Flask(__name__)
-CORS(app)
-
-app.config['UPLOAD_FOLDER'] = './uploads'
-app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024  # 10MB
-
-if not os.path.exists(app.config['UPLOAD_FOLDER']):
-    os.makedirs(app.config['UPLOAD_FOLDER'])
-
-@app.route('/')
-def hello():
-    return render_template('index.html')
-
-# 🆕 Serve profile pictures
-@app.route('/uploads/<filename>')
-def uploaded_file(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
-
-# Blueprints
-app.register_blueprint(sign)
-app.register_blueprint(prof)
-
-if __name__ == "__main__":
-    app.run(debug=True)
+                <div className="text-center mt-3">
+                  <span>Don't have an account? </span>
+                  <Link to="/signup" className="signup-link" style={{ textDecoration: "none", fontWeight: "bold" }}>
+                  Sign Up 
+                  </Link>
+                </div>
 
 
+              </>
+              
+            
+          </Form>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Login;

@@ -27,9 +27,9 @@ def edit_profile(user_id):
         cursor.execute("SELECT pic FROM users WHERE id=%s", (user_id,))
         existing_pic = cursor.fetchone()
         if existing_pic:
-            filename = existing_pic[0]  
+            filename = existing_pic[0]
         else:
-            return jsonify({"message": "No previous picture found!"}), 404
+            filename = ''  
 
     cursor.execute("SELECT password, role FROM users WHERE id=%s", (user_id,))
     res = cursor.fetchone()
@@ -42,65 +42,28 @@ def edit_profile(user_id):
     if old_pass != old_password:
         return jsonify({"message": "Old password is incorrect!"}), 401
 
-    else:
-        # تحديث البيانات
-        cursor.execute("UPDATE users SET email=%s, password=%s, name=%s, phone=%s, pic=%s, age=%s WHERE id=%s",
-                       (email, new_password, name, phone, filename, age, user_id))
+    cursor.execute("UPDATE users SET email=%s, password=%s, name=%s, phone=%s, pic=%s, age=%s WHERE id=%s",
+                   (email, new_password, name, phone, filename, age, user_id))
 
-        if role == 'doctor':
-            cursor.execute("UPDATE doctors SET name=%s, doc_phone=%s WHERE do_id=%s", (name, phone, user_id))
+    if role == 'doctor':
+        cursor.execute("UPDATE doctors SET name=%s, doc_phone=%s, dage=%s WHERE do_id=%s",
+                       (name, phone, age, user_id))
+    elif role == 'patient':
+        cursor.execute("UPDATE patients SET name=%s, phone=%s, age=%s WHERE pid=%s",
+                       (name, phone, age, user_id))
 
-        elif role == 'patient':
-            cursor.execute("UPDATE patients SET name=%s, phone=%s WHERE pid=%s", (name, phone, user_id))
-
-        con.commit()
-        return jsonify({
-            "message": "User Updated successfully",
-            "email": email,
-            "password": new_password,
-            "name": name,
-            "phone": phone,
-            "age": age,
-            "pic": f"http://localhost:5000/uploads/{filename}"
-        })
-
-
-@prof.route('/get_profile/<int:user_id>', methods=['GET'])
-def get_profile(user_id):
-    if not user_id:
-        return jsonify({"error": "Missing user_id"}), 400
-
-    try:
-        cursor = con.cursor()
-        cursor.execute("SELECT * FROM users WHERE id = %s", (user_id,))
-        user = cursor.fetchone()
-
-        if user:
-            pic_name = os.path.basename(user[5])  # التأكد من أخذ اسم الصورة فقط
-            profile = {
-                "id": user[0],
-                "email": user[1],
-                "password": user[2],
-                "role": user[3],
-                "name": user[4],
-                "p": user[5],
-                "gender": user[6],
-                "age": user[7],
-                "phone": user[8],
-                "pic": f"http://127.0.0.1:5000/uploads/{pic_name}"
-            }
-            return jsonify(profile), 200
-        else:
-            return jsonify({"message": "User not found"}), 404
-
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+    con.commit()
+    return jsonify({
+        "message": "User Updated successfully",
+        "email": email,
+        "password": new_password,
+        "name": name,
+        "phone": phone,
+        "age": age,
+        "pic": f"http://localhost:5000/uploads/{filename}" 
+    })
 
 
-
-
-
-# get profile dr , patient
 @prof.route('/get_profile/<int:user_id>', methods=['GET'])
 def get_profile(user_id):
     if not user_id:
@@ -121,17 +84,18 @@ def get_profile(user_id):
                     patients.name, patients.age, patients.gender, patients.phone, patients.blood_type
                 FROM users
                 JOIN patients ON users.id = patients.pid
-                WHERE users.id = %s
+                WHERE patients.pid = %s
             """, (user_id,))
             user = cursor.fetchone()
-            
+
             if user:
+                pic_name = os.path.basename(user[4]) 
                 profile = {
                     "id": user[0],
                     "email": user[1],
                     "password": user[2],
                     "role": user[3],
-                    "pic": f"http://127.0.0.1:5000/uploads/{user[4]}",
+                    "pic": f"http://127.0.0.1:5000/uploads/{pic_name}" ,
                     "name": user[5],
                     "age": user[6],
                     "gender": user[7],
@@ -146,22 +110,23 @@ def get_profile(user_id):
             cursor.execute("""
                 SELECT 
                     users.id, users.email, users.password, users.role, users.pic,
-                    doctor.name, doctor.speciality, doctor.gender, doctor.doc_phone, doctor.dage
+                    doctors.name, doctors.specialty, doctors.gender, doctors.doc_phone, doctors.dage
                 FROM users
-                JOIN doctor ON users.id = doctor.do_id
-                WHERE users.id = %s
+                JOIN doctors ON users.id = doctors.do_id
+                WHERE doctors.do_id = %s
             """, (user_id,))
             user = cursor.fetchone()
 
             if user:
+                pic_name = os.path.basename(user[4]) 
                 doctor_profile = {
                     "id": user[0],
                     "email": user[1],
                     "password": user[2],
                     "role": user[3],
-                    "pic": f"http://127.0.0.1:5000/uploads/{user[4]}",
+                    "pic": f"http://127.0.0.1:5000/uploads/{pic_name}" ,
                     "name": user[5],
-                    "speciality": user[6],
+                    "specialty": user[6],
                     "gender": user[7],
                     "phone": user[8],
                     "age": user[9]

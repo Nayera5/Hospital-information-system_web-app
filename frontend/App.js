@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { useState } from "react";
 import "./App.css";
-import Login from "./component/Login";
-import Signup from "./component/Signup";
-import Bar from "./component/Navbar";
-import Home from "./component/Homepage";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
+import Bar from "./components/Navbar";
+import Home from "./components/Homepage";
 import Profile from './components/patientprof';
 import Edit from './components/profedit';
 
@@ -16,14 +16,14 @@ function AppContent() {
 
   return (
     <>
-      {showNavbar && <Bar isSignedUp={isSignedUp} />}
+      {showNavbar && <Bar isSignedUp={isSignedUp} setIsSignedUp={setIsSignedUp} />}
       <Routes>
         <Route path="/" element={<Home/>} />
         <Route path="/login" element={<Login setIsSignedUp={setIsSignedUp} />} />
         <Route path="/signup" element={<Signup setIsSignedUp={setIsSignedUp} />} />
         <Route path="/get_profile/:id" element={<Profile/>} />
-        <Route path="/edit/:id" element={<Edit/>} />
-      </Routes>
+        <Route path="/edit/:id" element={<Edit/>} />     
+         </Routes>
     </>
   );
 }

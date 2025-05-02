@@ -101,6 +101,7 @@ function Signup({ setIsSignedUp }) {
     try {
       const response = await axios.post("http://127.0.0.1:5000/reg", dataToSend);
       console.log("Response from backend:", response.data);
+      localStorage.setItem("user_id", response.data.user_id); //=======
       alert("Registration successful!");
       setIsSignedUp(true);  
       navigate("/"); 

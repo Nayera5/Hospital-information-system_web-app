@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { AnimatePresence, motion } from 'framer-motion';
 import "./App.css";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
@@ -22,7 +23,7 @@ function AppContent() {
 
   const handleLogin = (status) => {
     setIsSignedUp(status);
-    localStorage.setItem("isSignedUp", JSON.stringify(status)); 
+    localStorage.setItem("isSignedUp", JSON.stringify(status));
   };
 
   const showNavbar = !["/signup", "/login"].includes(location.pathname);
@@ -30,17 +31,32 @@ function AppContent() {
   return (
     <>
       {showNavbar && <Bar isSignedUp={isSignedUp} setIsSignedUp={handleLogin} />}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/contact" element={<ContactUs />} />
-        <Route path="/login" element={<Login setIsSignedUp={handleLogin} />} />
-        <Route path="/signup" element={<Signup setIsSignedUp={handleLogin} />} />
-        <Route path="/get_profile/:id" element={<Profile />} />
-        <Route path="/edit/:id" element={<Edit />} />
-      </Routes>
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<PageWrapper><Home /></PageWrapper>} />
+          <Route path="/contact" element={<PageWrapper><ContactUs /></PageWrapper>} />
+          <Route path="/login" element={<PageWrapper><Login setIsSignedUp={handleLogin} /></PageWrapper>} />
+          <Route path="/signup" element={<PageWrapper><Signup setIsSignedUp={handleLogin} /></PageWrapper>} />
+          <Route path="/get_profile/:id" element={<PageWrapper><Profile /></PageWrapper>} />
+          <Route path="/edit/:id" element={<PageWrapper><Edit /></PageWrapper>} />
+        </Routes>
+      </AnimatePresence>
     </>
   );
 }
+
+const PageWrapper = ({ children }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.5 }}
+    >
+      {children}
+    </motion.div>
+  );
+};
 
 function App() {
   return (

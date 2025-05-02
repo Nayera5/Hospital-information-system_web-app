@@ -8,12 +8,13 @@ import { MdDateRange } from "react-icons/md";
 import { Link , useNavigate} from 'react-router-dom';
 import { FaHome } from 'react-icons/fa';
 import { FaVenusMars } from "react-icons/fa";
-import photo from '../pictures/doct.jpg'
+import photo from '../pictures/ai-generated2.jpg'
 
 import axios from 'axios';
 
 
 import './Signup.css';
+import { color } from 'framer-motion';
 
 
 function Signup({ setIsSignedUp }) {
@@ -101,7 +102,7 @@ function Signup({ setIsSignedUp }) {
     try {
       const response = await axios.post("http://127.0.0.1:5000/reg", dataToSend);
       console.log("Response from backend:", response.data);
-      localStorage.setItem("user_id", response.data.user_id); //=======
+      localStorage.setItem("user_id", response.data.user_id); 
       alert("Registration successful!");
       setIsSignedUp(true);  
       navigate("/"); 
@@ -131,7 +132,13 @@ function Signup({ setIsSignedUp }) {
     <FaHome />
   </Link>
 </>
+     <div id="subtitle">
+     <h1>TopCare</h1>
+        <p  id="pagetext">Precision in every scan, care in every step</p>
       </div>
+
+      </div>
+  
       <div className="right-side">
         <div className="form-content">
           
@@ -175,7 +182,7 @@ function Signup({ setIsSignedUp }) {
                 <Form.Group className="mb-3">
                   <InputGroup>
                     <InputGroup.Text><MdDateRange /></InputGroup.Text>
-                    <Form.Control type="number"name="age"placeholder="Age"min="1"max="120"value={formData.age}onChange={handleChange} required/>
+                    <Form.Control type="number"name="age"placeholder="Age"min="1"max="150"value={formData.age}onChange={handleChange} required/>
                   </InputGroup>
                 </Form.Group>
 

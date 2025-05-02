@@ -5,7 +5,7 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import { Form, InputGroup, Button, Row, Col, Container } from 'react-bootstrap'
 import { Link , useNavigate} from 'react-router-dom';
 import { FaHome } from 'react-icons/fa';
-import photo from '../pictures/doct.jpg'
+import photo from '../pictures/ai-generated2.jpg'
 
 
 import axios from 'axios';
@@ -34,7 +34,7 @@ const handleSubmit = async (e) => {
 
     setIsSignedUp(true); 
     alert("Login successful");
-    navigate(`/get_profile/${formData.user_id}`); 
+    navigate("/"); 
 
   } catch (error) {
     console.error('Login failed:', error.response ? error.response.data : error.message);
@@ -55,6 +55,11 @@ const handleSubmit = async (e) => {
     <FaHome />
   </Link>
 </>
+<div id="subtitle">
+     <h1>TopCare</h1>
+        <p  id="pagetext">Precision in every scan, care in every step</p>
+      </div>
+
       </div>
       <div className="right-side">
         <div className="form-content">

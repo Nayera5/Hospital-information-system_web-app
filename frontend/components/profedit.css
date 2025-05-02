@@ -1,34 +1,80 @@
+/* ناخد في الاعتبار ارتفاع النافبار، غالباً 70 أو 80 بيكسل */
+.Update-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e8eeef, #5ba2c0);
+  padding: 20px;
+  padding-top: 100px; /* يبعد تحت النافبار لو fixed */
+  box-sizing: border-box;
+}
 
+.edit-card {
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s ease;
+  background: #ffffff;
+  padding: 30px;
+  width: 100%;
+  max-width: 500px;
+}
 
-.Update-page{
-    display: flex;
-    width: 107vw;
-    height: 100vh;
-    background: linear-gradient(135deg, #a5b4fc, #6366f1);
-    }
-  
-  
-  .edit-card {
-    border: none;
-    border-radius: 12px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s ease;
-    background: #ffffff;
-    padding: 20px 25px;
-    margin: 0 auto;
-    margin-top: 8%;
-    margin-bottom: 8%;
-    width: 100%;
-    max-width: 500px; /* limit width */
-    }
-    
-  .edit-card:hover {
-    transform: scale(1.01);
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
-  }
-  
-  
-  .content {
-    max-height: 90%;
-    padding: 20px;
-  }
+.edit-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.content {
+  padding: 20px;
+}
+
+#update {
+  font-size: 28px;
+  font-weight: 700;
+  color: #0C7B99;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.custom-button {
+  background-color: #0C7B99;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  color: #fff;
+}
+
+.custom-button:hover {
+  background-color: #095d73;
+  transform: translateY(-2px);
+}
+
+input.form-control {
+  border-radius: 50px;
+  padding: 10px 15px;
+  transition: border-color 0.3s;
+}
+
+input.form-control:focus {
+  border-color: #0C7B99;
+  box-shadow: none;
+}
+
+.text-center img {
+  border: 4px solid #0C7B99;
+  padding: 4px;
+  transition: transform 0.3s ease;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.text-center img:hover {
+  transform: scale(1.05);
+}

@@ -87,7 +87,7 @@ function Edit() {
           <div className="edit-card">
             <div className="content">
               
-              <h2 className="text-center mb-4" id='signup'>Update your Account</h2>
+              <h2 className="text-center mb-4" id='update'>Update your Account</h2>
     
     
               <Form onSubmit={handleSubmit} >
@@ -141,34 +141,11 @@ function Edit() {
                       </InputGroup>
                     </Form.Group>
 
-                    {/* <Form.Group className="mb-3">
-                      <InputGroup>
-                        <InputGroup.Text></InputGroup.Text>
-                        <Form.Control type="text" name="blood type" placeholder="blood type" 
-                        value= {user.blood_type} onChange={e => setUser({...user, blood_type: e.target.value})}/>
-                      </InputGroup>
-                    </Form.Group> */}
-                    
-                    {/* {user.role === 'doctor' && (
+                    {/*?{user.role === 'patient' && (
                       <>
-                        <Form.Group className="mb-3">
-                          <Form.Control type="text"name="specialty"placeholder="Specialization"value={formData.specialty}onChange={handleChange} required/>
-                        </Form.Group>
                         
                       </>
-                    )} */}
-    
-                    {user.role === 'patient' && (
-                      <>
-                        <Form.Group className="mb-3">
-                          <InputGroup>
-                            <InputGroup.Text></InputGroup.Text>
-                            <Form.Control type="text" name="blood type" placeholder="blood type" 
-                            value= {user.blood_type} onChange={e => setUser({...user, blood_type: e.target.value})}/>
-                          </InputGroup>                        
-                      </Form.Group>
-                      </>
-                    )}
+                    )}*/}
 
                     {preview && (
                       <div className="text-center mb-3">

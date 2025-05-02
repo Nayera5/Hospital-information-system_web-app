@@ -19,11 +19,8 @@ const Bar = ({ isSignedUp, setIsSignedUp }) => {
     <Navbar expand="lg" bg="light" variant="light">
       <Container>
         <Navbar.Brand >
-          <img
-            src="download.png"
-            alt="Hospital Logo"
-            style={{ width: '150px', height: 'auto' }}
-          />
+          <h1 id="  #
+">TopCare</h1>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarNav" />
         <Navbar.Collapse id="navbarNav">
@@ -34,7 +31,7 @@ const Bar = ({ isSignedUp, setIsSignedUp }) => {
             {isSignedUp ? (
               <>
               <Nav.Link as={Link} to="/get_profile/:id">Profile</Nav.Link>
-              <Nav.Link as="button" onClick={handleLogout}>Log Out</Nav.Link>  {/* تغيير إلى زر مع onClick */}
+              <Nav.Link as="button" onClick={handleLogout}>Log Out</Nav.Link>  
             </>
             ) : (
               <>
@@ -42,7 +39,7 @@ const Bar = ({ isSignedUp, setIsSignedUp }) => {
                 <Nav.Link as={Link} to="/login">Log in</Nav.Link>
               </>
             )}
-                  <Nav.Link  id ="contactus" as={Link} to="/">Contact Us</Nav.Link>
+            <Nav.Link as={Link} to="/contact">Contact Us</Nav.Link>
 
 
 

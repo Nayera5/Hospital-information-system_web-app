@@ -1,13 +1,13 @@
-/* تصميم الـ Navbar */
 .navbar {
     padding: 15px 30px;
-    background-color:#2f5dac  !important;  
+    background-color:#0C7B99  !important;  
     border-radius: 10px;
   }
-  #home{
-margin-right: 670px;
-    
+  #topcare{
+font-weight: bolder;
+padding-right: 30px;
   }
+  
   
     .navbar-brand {
     font-size: 1.8rem;
@@ -18,7 +18,7 @@ margin-right: 670px;
   }
   
   .navbar-brand img {
-    height: 50px;  /* تعديل حجم اللوجو */
+    height: 50px;  
     margin-right: 10px;
   }
   
@@ -28,7 +28,7 @@ margin-right: 670px;
     font-size: 1.1rem;
     font-weight: 500;
     color: rgb(255, 250, 254);
-    margin-right: 40px;  /* مسافة بين العناصر */
+    margin-right: 40px;  
     transition: color 0.3s ease;
   }
   
@@ -36,21 +36,19 @@ margin-right: 670px;
     color: #05090a
   }
   
-  /* تعديل المسافات عند تصغير الشاشة */
   @media (max-width: 992px) {
     .navbar {
       padding: 10px 20px;
     }
   
     .navbar-nav .nav-link {
-      margin-right: 15px;  /* تقليل المسافة بين الروابط في الشاشات الصغيرة */
+      margin-right: 15px;  
     }
   }
   
-  /* تصميم الـ Navbar في حالة التوسع */
   @media (min-width: 992px) {
     .navbar-collapse {
-      justify-content: flex-end;  /* وضع العناصر في أقصى اليمين */
+      justify-content: flex-end;  
     }
   }
   

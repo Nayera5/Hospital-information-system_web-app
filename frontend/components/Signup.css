@@ -1,20 +1,28 @@
 
-
 .signup-page, .signin-page {
   display: flex;
   width: 100vw;
   height: 100vh;
   overflow-x: hidden; 
 }
+#pagetext{
+font-size: 29px;
+color: #E3F0F8;
 
+
+}
 img{
   margin: 0;
   padding: 0;
 }
+#subtitle{
+padding-left: 280px;
+font-weight: 500;
 
+}
 .left-side {
   width: 50%;
-  background: linear-gradient(135deg, #a5b4fc, #6366f1), url('../pictures/hospital.png');
+  background: linear-gradient(135deg, #a5b4fc, #0C7B99);
   background-size: cover;
   background-position: center;
   color: white;
@@ -53,7 +61,7 @@ img{
 }
 #signup, #login {
   font-weight: bolder;
-  color: #28576B;
+  color: #0C7B99;
   width: 100%;
   text-align: left;
   margin-bottom: 20px;
@@ -63,7 +71,6 @@ img{
   width: 60%;
   max-height: 90%;
   overflow-y: auto;
-  padding-left: 60px;
 
   padding-left: 20px;
   padding-right: 40px;
@@ -72,7 +79,7 @@ img{
 }
 
 .custom-button {
-  background-color: #2f657c;
+  background-color: #0C7B99;
   border: none;
   padding: 10px;
   font-weight: bold;
@@ -87,9 +94,9 @@ img{
 }
 
 .custom-button:active {
-  transform: scale(0.98); /* Shrink effect when clicked */
+  transform: scale(0.98); 
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  background-color: #28576B; 
+  background-color: #0C7B99; 
 }
 .custom-button.loading {
   background-color: #28576B;
@@ -97,7 +104,7 @@ img{
 }
 
 .custom-button.loading:active {
-  transform: scale(1); /* Prevent scale effect when loading */
+  transform: scale(1); 
 }
 
 .text-center {
@@ -117,7 +124,7 @@ input, select {
   border-radius: 10px !important;
 }
 .login-link ,.signup-link{
-  color: #2f657c;
+  color: #0C7B99;
   text-decoration: none;
   font-weight: bold;
 }
@@ -139,5 +146,5 @@ input, select {
 
 .home-icon:hover {
   transform: scale(1.2);
-  color: #4175ad;
+  color: #0C7B99;
 }

@@ -10,13 +10,7 @@ scroll-behavior: smooth;
 }
 
 
-:root{ 
---main-color:#1f2278;
---orange-color:#f17732;
---btn-color:#565acf;
 
-
-}
 section,footer,header{
 width:100%;
 height:auto;

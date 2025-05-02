@@ -98,3 +98,81 @@ def get_profile(user_id):
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+
+
+# get profile dr , patient
+@prof.route('/get_profile/<int:user_id>', methods=['GET'])
+def get_profile(user_id):
+    if not user_id:
+        return jsonify({"error": "Missing user_id"}), 400
+
+    try:
+        cursor = con.cursor()
+        cursor.execute("SELECT role FROM users WHERE id = %s", (user_id,))
+        user_role = cursor.fetchone()
+
+        if not user_role:
+            return jsonify({"message": "User not found"}), 404
+
+        if user_role[0] == 'patient':
+            cursor.execute("""
+                SELECT 
+                    users.id, users.email, users.password, users.role, users.pic,
+                    patients.name, patients.age, patients.gender, patients.phone, patients.blood_type
+                FROM users
+                JOIN patients ON users.id = patients.pid
+                WHERE users.id = %s
+            """, (user_id,))
+            user = cursor.fetchone()
+            
+            if user:
+                profile = {
+                    "id": user[0],
+                    "email": user[1],
+                    "password": user[2],
+                    "role": user[3],
+                    "pic": f"http://127.0.0.1:5000/uploads/{user[4]}",
+                    "name": user[5],
+                    "age": user[6],
+                    "gender": user[7],
+                    "phone": user[8],
+                    "blood_type": user[9]
+                }
+                return jsonify(profile), 200
+            else:
+                return jsonify({"message": "Patient data not found"}), 404
+
+        elif user_role[0] == 'doctor':
+            cursor.execute("""
+                SELECT 
+                    users.id, users.email, users.password, users.role, users.pic,
+                    doctor.name, doctor.speciality, doctor.gender, doctor.doc_phone, doctor.dage
+                FROM users
+                JOIN doctor ON users.id = doctor.do_id
+                WHERE users.id = %s
+            """, (user_id,))
+            user = cursor.fetchone()
+
+            if user:
+                doctor_profile = {
+                    "id": user[0],
+                    "email": user[1],
+                    "password": user[2],
+                    "role": user[3],
+                    "pic": f"http://127.0.0.1:5000/uploads/{user[4]}",
+                    "name": user[5],
+                    "speciality": user[6],
+                    "gender": user[7],
+                    "phone": user[8],
+                    "age": user[9]
+                }
+                return jsonify(doctor_profile), 200
+            else:
+                return jsonify({"message": "Doctor data not found"}), 404
+
+        else:
+            return jsonify({"message": "Invalid user role"}), 400
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500

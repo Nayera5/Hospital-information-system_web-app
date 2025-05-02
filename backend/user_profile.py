@@ -15,17 +15,23 @@ def edit_profile(user_id):
     name=request.form.get('name')
     pic=request.files.get('pic')
     phone=request.form.get('phone')
+    age = request.form.get('age')
 
+    cursor=con.cursor()
 
     if pic:
         filename = secure_filename(pic.filename)
         filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], filename).replace("\\", "/")
         pic.save(filepath)
     else:
-        return jsonify({"message": "Enter a picture please!"}),409
+        # استخدم الصورة القديمة بدل من الإرجاع بخطأ
+        cursor.execute("SELECT pic FROM users WHERE id=%s", (user_id,))
+        existing_pic = cursor.fetchone()
+        if existing_pic:
+            filename = existing_pic[0]
+        else:
+            return jsonify({"message": "No previous picture found!"}), 404
 
-
-    cursor=con.cursor()
     
     cursor.execute("SELECT password,role FROM users WHERE id=%s",(user_id,))
     res=cursor.fetchone()
@@ -40,7 +46,7 @@ def edit_profile(user_id):
 
     else:
         #update
-        cursor.execute("UPDATE users SET email=%s,password=%s,name=%s,phone=%s,pic=%s WHERE id=%s",(email,new_password,name,phone,filename,user_id))
+        cursor.execute("UPDATE users SET email=%s,password=%s,name=%s,phone=%s,pic=%s,age=%s WHERE id=%s",(email,new_password,name,phone,filename,age,user_id))
 
         if role=='doctor':
             cursor.execute("UPDATE doctors SET name=%s,doc_phone=%s WHERE do_id=%s",(name,phone,user_id))
@@ -56,15 +62,15 @@ def edit_profile(user_id):
                         "password":new_password,
                         "name": name,
                         "phone": phone,
+                        "age": age,
                         "pic": f"http://localhost:5000/uploads/{filename}"
                         })
 
 
 
 #get user
-@app.route('/get_profile', methods=['GET'])
-def get_profile():
-    user_id = request.args.get('user_id')
+@prof.route('/get_profile/<int:user_id>', methods=['GET'])
+def get_profile(user_id):
     if not user_id:
         return jsonify({"error": "Missing user_id"}), 400
 
@@ -73,54 +79,22 @@ def get_profile():
         cursor.execute("SELECT * FROM users WHERE id = %s", (user_id,))
         user = cursor.fetchone()
 
-         if not user:
-            return jsonify({"message": "User not found"}), 404
-
-        user_id, email, role = user
-
-        if role == 'patient':
-            cursor.execute(
-                "SELECT pid, name, age, gender, blood_type, phone FROM patients WHERE pid = %s", (user_id,))
-            data = cursor.fetchone()
-
-            if data:
-                profile = {
-                    "id": data[0],
-                    "email": email,
-                    "role": role,
-                    "name": data[1],
-                    "age": data[2],
-                    "gender": data[3],
-                    "blood_type": data[4],
-                    "phone": data[5]
-                }
-            else:
-                return jsonify({"message": "Patient details not found"}), 404
-
-        elif role == 'doctor':
-            cursor.execute(
-                "SELECT do_id, name, speciality, gender, doc_phone, dage FROM doctors WHERE do_id = %s", (user_id,))
-            data = cursor.fetchone()
-
-            if data:
-                profile = {
-                    "id": data[0],
-                    "email": email,
-                    "role": role,
-                    "name": data[1],
-                    "speciality": data[2],
-                    "gender": data[3],
-                    "phone": data[4],
-                    "age": data[5]
-                }
-            else:
-                return jsonify({"message": "Doctor details not found"}), 404
-
+        if user:
+            profile = {
+                "id": user[0],
+                "email": user[1],
+                "password": user[2],
+                "role": user[3],
+                "name": user[4],
+                "p": user[5],
+                "gender": user[6],
+                "age": user[7],
+                "phone": user[8],
+                "pic": f"http://127.0.0.1:5000/uploads/{user[5]}"  # <- Add this
+            }
+            return jsonify(profile), 200
         else:
-            return jsonify({"message": "Unknown role"}), 403
-
-        return jsonify(profile), 200
+            return jsonify({"message": "User not found"}), 404
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-

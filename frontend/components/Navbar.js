@@ -34,7 +34,7 @@ const Bar = ({ isSignedUp, setIsSignedUp }) => {
 
             {isSignedUp ? (
               <>
-              <Nav.Link as={Link} to="/profile">Profile</Nav.Link>
+              <Nav.Link as={Link} to="/get_profile/:id">Profile</Nav.Link>
               <Nav.Link as="button" onClick={handleLogout}>Log Out</Nav.Link>  {/* تغيير إلى زر مع onClick */}
             </>
             ) : (

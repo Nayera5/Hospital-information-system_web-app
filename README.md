@@ -1,5 +1,18 @@
-# Hospital-information-system_web-app
->### [Recorded Video](https://drive.google.com/drive/folders/1FvOyCIfS7AwhP5SSqAyeJAwAy7QIpVeZ?usp=sharing)
+# Hospital information system web app
+>## [Recorded Video](https://drive.google.com/drive/folders/1FvOyCIfS7AwhP5SSqAyeJAwAy7QIpVeZ?usp=sharing)
+---
+## **Members:**
+- [Nayera Sherif Elaraby](https://github.com/Nayera5)
+
+- [Samar Hatem Fathy](https://github.com/samar04052004)
+ 
+- [Shahd Ayman Rezk](https://github.com/Shahd-Ayman5)
+ 
+- [Nada Hassan Mohamed](https://github.com/Nadahassan147)
+ 
+- [Nada Hesham Mohamed](https://github.com/Nada-Hesham249)
+ 
+
 ----
 # Description
 The project aims to develop a dynamic web application simulating a Hospital Information System (HIS) for a radiology department
@@ -13,26 +26,12 @@ The project aims to develop a dynamic web application simulating a Hospital Info
 - Database: `PostgreSQL`
 ---
 
-# Project Explanation
-# 1. Home page for visitors 
-  ![home](https://github.com/user-attachments/assets/eac6cfe8-8886-424a-a13c-a1968668aff3)
-  ![home](https://github.com/user-attachments/assets/728336a5-5ca4-4c06-b446-771c136f614c)
 
-# 2. Sign Up as a doctor or patient
-   ![photo_5814605358042302624_y](https://github.com/user-attachments/assets/a28aa2ab-ca9e-45ad-abff-bc2463f71a92)
-   ![photo_5814605358042302623_y](https://github.com/user-attachments/assets/7fed96e2-8d5c-474a-9981-5e787dbdad9f)
+# **Responsive Web design:**
+ ![image](https://github.com/user-attachments/assets/a5c04b1c-3a7e-416d-910e-47072bba321c)
+ ![image1](https://github.com/user-attachments/assets/1fdcb77e-df06-46eb-9757-6bac4dc3aaa0)
+ ![image2](https://github.com/user-attachments/assets/f935d7c8-5065-437d-a0cf-056665f4492b)
 
-# 3. Log in with your created account
-
-![photo_5814605358042302620_y](https://github.com/user-attachments/assets/9f302f62-d425-4abd-9059-11d0d412f2ec)
-
-# 4. Profile opened!
-![photo_5814605358042302628_y](https://github.com/user-attachments/assets/a2676d35-839a-496d-888c-3821077f1268)
-
-# 5. You can edit the profile
-![photo_5814605358042302629_y](https://github.com/user-attachments/assets/687492f2-f269-4322-bf71-ae31cc00af88)
-
-# 6. You can log out > Home page
 
 
 
